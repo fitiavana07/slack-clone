@@ -106,4 +106,32 @@ export default class MessageService {
     }
     return await this.channelModel.findById(id)
   }
+
+  async sendChannelMessage(
+    destID: Types.ObjectId,
+    messageContent: string,
+    context: Context,
+  ): Promise<MessageDoc> {
+    if (!context.userID) {
+      throw new UnauthenticatedError()
+    }
+
+    return await new this.messageModel({
+      content: messageContent,
+      authorID: context.userID,
+      destType: MessageDestinationType.ChannelMessage,
+      destID: destID,
+    }).save()
+  }
+
+  async findChannelMessages(
+    channel: ChannelDoc,
+    context: Context,
+  ): Promise<MessageDoc[]> {
+    // TODO here: for private channel, only allow members to see messages.
+    return this.messageModel.find({
+      destType: MessageDestinationType.ChannelMessage,
+      destID: channel._id,
+    })
+  }
 }

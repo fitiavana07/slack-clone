@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import Context from '../context'
 import { MutationResolvers } from '../generated/graphql'
 
@@ -20,6 +21,14 @@ const Mutation: MutationResolvers<Context> = {
       context,
     )
     return { channel }
+  },
+  sendChannelMessage: async (_, { input }, context) => {
+    const message = await context.messageService.sendChannelMessage(
+      new Types.ObjectId(input.destID),
+      input.messageContent,
+      context,
+    )
+    return { message }
   },
 }
 
