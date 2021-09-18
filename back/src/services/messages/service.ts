@@ -96,4 +96,14 @@ export default class MessageService {
     }
     return await this.channelModel.find()
   }
+
+  async findChannel(
+    id: Types.ObjectId,
+    context: Context,
+  ): Promise<ChannelDoc | null> {
+    if (!context.userID) {
+      throw new UnauthenticatedError()
+    }
+    return await this.channelModel.findById(id)
+  }
 }

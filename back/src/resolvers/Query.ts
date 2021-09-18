@@ -18,6 +18,12 @@ const Query: QueryResolvers<Context> = {
   channels: async (_, __, context) => {
     return await context.messageService.findChannels(context)
   },
+  channel: async (_, { id }, context) => {
+    return await context.messageService.findChannel(
+      new Types.ObjectId(id),
+      context,
+    )
+  },
 }
 
 export default Query
