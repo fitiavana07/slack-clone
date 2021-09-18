@@ -8,7 +8,7 @@ const schema = new Schema(
       required: true,
     },
     authorID: {
-      type: Schema.Types.String,
+      type: Schema.Types.ObjectId,
       required: true,
     },
     destType: {

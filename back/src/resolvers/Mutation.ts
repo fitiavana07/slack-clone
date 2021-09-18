@@ -14,6 +14,13 @@ const Mutation: MutationResolvers<Context> = {
     const message = await context.messageService.sendDM(input, context)
     return { message }
   },
+  addChannel: async (_, { input }, context) => {
+    const channel = await context.messageService.addChannel(
+      input.name,
+      context,
+    )
+    return { channel }
+  },
 }
 
 export default Mutation

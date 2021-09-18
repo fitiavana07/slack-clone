@@ -1,4 +1,27 @@
 type Channel implements Node {
   id: ID!
+  name: String!
   private: Boolean!
+  messages: [Message!]
+  creator: User!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+input AddChannelInput {
+  name: String!
+}
+
+type AddChannelPayload {
+  channel: Channel!
+}
+
+input SendChannelMessageInput {
+  messageContent: String!
+  """Channel ID to send the message to"""
+  destID: ID!
+}
+
+type SendChannelMessagePayload {
+  message: Message!
 }

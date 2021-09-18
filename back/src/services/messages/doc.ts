@@ -1,6 +1,8 @@
+import { Document, Types } from 'mongoose'
 import { Message } from '../../generated/graphql'
 
-export type MessageDoc = Message & {
-  authorID: string
-  destID: string
-}
+export type MessageDoc = Document &
+  Message & {
+    authorID: Types.ObjectId
+    destID: Types.ObjectId
+  }

@@ -26,9 +26,21 @@ export type Scalars = {
   Date: any
 }
 
+export type AddChannelInput = {
+  name: Scalars['String']
+}
+
+export type AddChannelPayload = {
+  __typename?: 'AddChannelPayload'
+  channel: Channel
+}
+
 export type Channel = Node & {
   __typename?: 'Channel'
+  creator: User
   id: Scalars['ID']
+  messages?: Maybe<Array<Message>>
+  name: Scalars['String']
   private: Scalars['Boolean']
 }
 
@@ -64,13 +76,23 @@ export enum MessageDestinationType {
 
 export type Mutation = {
   __typename?: 'Mutation'
+  addChannel: AddChannelPayload
   login: LoginPayload
+  sendChannelMessage: SendChannelMessagePayload
   sendDM: SendDmPayload
   signup: SignupPayload
 }
 
+export type MutationAddChannelArgs = {
+  input: AddChannelInput
+}
+
 export type MutationLoginArgs = {
   input: LoginInput
+}
+
+export type MutationSendChannelMessageArgs = {
+  input: SendChannelMessageInput
 }
 
 export type MutationSendDmArgs = {
@@ -87,14 +109,31 @@ export type Node = {
 
 export type Query = {
   __typename?: 'Query'
+  channel?: Maybe<Channel>
+  channels?: Maybe<Array<Channel>>
   currentUser?: Maybe<User>
   /** Direct messages */
   dms?: Maybe<Array<Message>>
   users?: Maybe<Array<User>>
 }
 
+export type QueryChannelArgs = {
+  id: Scalars['ID']
+}
+
 export type QueryDmsArgs = {
   destID: Scalars['ID']
+}
+
+export type SendChannelMessageInput = {
+  /** Channel ID to send the message to */
+  destID: Scalars['ID']
+  messageContent: Scalars['String']
+}
+
+export type SendChannelMessagePayload = {
+  __typename?: 'SendChannelMessagePayload'
+  message: Message
 }
 
 export type SendDmInput = {
@@ -240,6 +279,8 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AddChannelInput: AddChannelInput
+  AddChannelPayload: ResolverTypeWrapper<AddChannelPayload>
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>
   Channel: ResolverTypeWrapper<Channel>
   Date: ResolverTypeWrapper<Scalars['Date']>
@@ -254,6 +295,8 @@ export type ResolversTypes = {
     | ResolversTypes['Message']
     | ResolversTypes['User']
   Query: ResolverTypeWrapper<{}>
+  SendChannelMessageInput: SendChannelMessageInput
+  SendChannelMessagePayload: ResolverTypeWrapper<SendChannelMessagePayload>
   SendDMInput: SendDmInput
   SendDMPayload: ResolverTypeWrapper<SendDmPayload>
   SignupInput: SignupInput
@@ -264,6 +307,8 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AddChannelInput: AddChannelInput
+  AddChannelPayload: AddChannelPayload
   Boolean: Scalars['Boolean']
   Channel: Channel
   Date: Scalars['Date']
@@ -277,6 +322,8 @@ export type ResolversParentTypes = {
     | ResolversParentTypes['Message']
     | ResolversParentTypes['User']
   Query: {}
+  SendChannelMessageInput: SendChannelMessageInput
+  SendChannelMessagePayload: SendChannelMessagePayload
   SendDMInput: SendDmInput
   SendDMPayload: SendDmPayload
   SignupInput: SignupInput
@@ -285,11 +332,26 @@ export type ResolversParentTypes = {
   User: User
 }
 
+export type AddChannelPayloadResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['AddChannelPayload'] = ResolversParentTypes['AddChannelPayload'],
+> = {
+  channel?: Resolver<ResolversTypes['Channel'], ParentType, ContextType>
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
 export type ChannelResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Channel'] = ResolversParentTypes['Channel'],
 > = {
+  creator?: Resolver<ResolversTypes['User'], ParentType, ContextType>
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+  messages?: Resolver<
+    Maybe<Array<ResolversTypes['Message']>>,
+    ParentType,
+    ContextType
+  >
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   private?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
@@ -334,11 +396,23 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
+  addChannel?: Resolver<
+    ResolversTypes['AddChannelPayload'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddChannelArgs, 'input'>
+  >
   login?: Resolver<
     ResolversTypes['LoginPayload'],
     ParentType,
     ContextType,
     RequireFields<MutationLoginArgs, 'input'>
+  >
+  sendChannelMessage?: Resolver<
+    ResolversTypes['SendChannelMessagePayload'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSendChannelMessageArgs, 'input'>
   >
   sendDM?: Resolver<
     ResolversTypes['SendDMPayload'],
@@ -370,6 +444,17 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
+  channel?: Resolver<
+    Maybe<ResolversTypes['Channel']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryChannelArgs, 'id'>
+  >
+  channels?: Resolver<
+    Maybe<Array<ResolversTypes['Channel']>>,
+    ParentType,
+    ContextType
+  >
   currentUser?: Resolver<
     Maybe<ResolversTypes['User']>,
     ParentType,
@@ -386,6 +471,14 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >
+}
+
+export type SendChannelMessagePayloadResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['SendChannelMessagePayload'] = ResolversParentTypes['SendChannelMessagePayload'],
+> = {
+  message?: Resolver<ResolversTypes['Message'], ParentType, ContextType>
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
 export type SendDmPayloadResolvers<
@@ -416,6 +509,7 @@ export type UserResolvers<
 }
 
 export type Resolvers<ContextType = any> = {
+  AddChannelPayload?: AddChannelPayloadResolvers<ContextType>
   Channel?: ChannelResolvers<ContextType>
   Date?: GraphQLScalarType
   LoginPayload?: LoginPayloadResolvers<ContextType>
@@ -423,6 +517,7 @@ export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>
   Node?: NodeResolvers<ContextType>
   Query?: QueryResolvers<ContextType>
+  SendChannelMessagePayload?: SendChannelMessagePayloadResolvers<ContextType>
   SendDMPayload?: SendDmPayloadResolvers<ContextType>
   SignupPayload?: SignupPayloadResolvers<ContextType>
   User?: UserResolvers<ContextType>

@@ -1,6 +1,10 @@
 type Query {
   currentUser: User
+  users: [User!]
+
   """Direct messages"""
   dms(destID: ID!): [Message!]
-  users: [User!]
+
+  channels: [Channel!]
+  channel(id: ID!): Channel
 }

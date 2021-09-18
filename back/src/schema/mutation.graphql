@@ -2,4 +2,6 @@ type Mutation {
   signup(input: SignupInput!): SignupPayload!
   login(input: LoginInput!): LoginPayload!
   sendDM(input: SendDMInput!): SendDMPayload!
+  addChannel(input: AddChannelInput!): AddChannelPayload!
+  sendChannelMessage(input: SendChannelMessageInput!): SendChannelMessagePayload!
 }

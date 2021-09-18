@@ -4,6 +4,9 @@ import { UserDoc } from './doc'
 import jwt from 'jsonwebtoken'
 import { ApolloError } from 'apollo-server-core'
 import { JWTPayload } from './jwt'
+import Context from '../../context'
+import { UnauthenticatedError } from './errors'
+import { Types } from 'mongoose'
 
 export default class UserService {
   private userModel: UserModel
@@ -64,11 +67,18 @@ export default class UserService {
     return await this.userModel.findOne({ email })
   }
 
-  async findByID(id: string): Promise<UserDoc | null> {
+  async findByID(id: Types.ObjectId): Promise<UserDoc | null> {
     return await this.userModel.findById(id)
   }
 
   async findUsers(): Promise<UserDoc[]> {
     return await this.userModel.find()
+  }
+
+  async getMe(context: Context): Promise<UserDoc | null> {
+    if (!context.userID) {
+      throw new UnauthenticatedError()
+    }
+    return await this.findByID(context.userID)
   }
 }

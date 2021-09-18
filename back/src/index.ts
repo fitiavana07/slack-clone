@@ -10,6 +10,8 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 import { createDBConnection } from './services/db'
 import { createUserModel, UserService } from './services/user'
 import { MessageService, createMessageModel } from './services/messages'
+import { Types } from 'mongoose'
+import { createChannelModel } from './services/messages/channels'
 
 const start = async () => {
   const app = express()
@@ -21,7 +23,12 @@ const start = async () => {
   const userService = new UserService(userModel, JWT_SECRET_KEY, JWT_EXP_DELTA)
 
   const messageModel = createMessageModel(dbConnection)
-  const messageService = new MessageService(messageModel, userService)
+  const channelModel = createChannelModel(dbConnection)
+  const messageService = new MessageService(
+    messageModel,
+    userService,
+    channelModel,
+  )
 
   const server = new ApolloServer({
     schema: makeExecutableSchema({
@@ -36,7 +43,7 @@ const start = async () => {
         userID = jwtPayload.id
       }
       return {
-        userID,
+        userID: new Types.ObjectId(userID),
         userService,
         messageService,
       }
