@@ -37,11 +37,13 @@ export type AddChannelPayload = {
 
 export type Channel = Node & {
   __typename?: 'Channel'
+  createdAt: Scalars['Date']
   creator: User
   id: Scalars['ID']
   messages?: Maybe<Array<Message>>
   name: Scalars['String']
   private: Scalars['Boolean']
+  updatedAt: Scalars['Date']
 }
 
 export type LoginInput = {
@@ -157,6 +159,15 @@ export type SignupInput = {
 export type SignupPayload = {
   __typename?: 'SignupPayload'
   accessToken: Scalars['String']
+}
+
+export type Subscription = {
+  __typename?: 'Subscription'
+  newDM?: Maybe<Message>
+}
+
+export type SubscriptionNewDmArgs = {
+  destID: Scalars['ID']
 }
 
 export type User = Node & {
@@ -302,6 +313,7 @@ export type ResolversTypes = {
   SignupInput: SignupInput
   SignupPayload: ResolverTypeWrapper<SignupPayload>
   String: ResolverTypeWrapper<Scalars['String']>
+  Subscription: ResolverTypeWrapper<{}>
   User: ResolverTypeWrapper<User>
 }
 
@@ -329,6 +341,7 @@ export type ResolversParentTypes = {
   SignupInput: SignupInput
   SignupPayload: SignupPayload
   String: Scalars['String']
+  Subscription: {}
   User: User
 }
 
@@ -344,6 +357,7 @@ export type ChannelResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Channel'] = ResolversParentTypes['Channel'],
 > = {
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>
   creator?: Resolver<ResolversTypes['User'], ParentType, ContextType>
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   messages?: Resolver<
@@ -353,6 +367,7 @@ export type ChannelResolvers<
   >
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   private?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -497,6 +512,19 @@ export type SignupPayloadResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
+export type SubscriptionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
+> = {
+  newDM?: SubscriptionResolver<
+    Maybe<ResolversTypes['Message']>,
+    'newDM',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionNewDmArgs, 'destID'>
+  >
+}
+
 export type UserResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User'],
@@ -520,5 +548,6 @@ export type Resolvers<ContextType = any> = {
   SendChannelMessagePayload?: SendChannelMessagePayloadResolvers<ContextType>
   SendDMPayload?: SendDmPayloadResolvers<ContextType>
   SignupPayload?: SignupPayloadResolvers<ContextType>
+  Subscription?: SubscriptionResolvers<ContextType>
   User?: UserResolvers<ContextType>
 }

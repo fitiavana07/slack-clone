@@ -5,3 +5,5 @@ export const JWT_SECRET_KEY =
   process.env.JWT_SECRET_KEY || '243ff818-6d84-4969-8c06-817e8ca43130'
 // JWT exp delta in seconds, defaults to 30 days = 86400 * 30
 export const JWT_EXP_DELTA = parseInt(process.env.JWT_EXP_DELTA || '2592000')
+export const REDIS_HOST = process.env.REDIS_HOST || 'localhost'
+export const REDIS_PORT = parseInt(process.env.REDIS_PORT || '6379')
