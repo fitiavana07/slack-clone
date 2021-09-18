@@ -1,0 +1,6 @@
+type Query {
+  currentUser: User
+  """Direct messages"""
+  dms(destID: ID!): [Message!]
+  users: [User!]
+}

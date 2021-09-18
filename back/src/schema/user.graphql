@@ -1,0 +1,26 @@
+type User implements Node {
+  id: ID!
+  username: String!
+  email: String!
+  fullName: String!
+}
+
+input SignupInput {
+  username: String!
+  email: String!
+  password: String!
+  fullName: String!
+}
+
+type SignupPayload {
+  accessToken: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginPayload {
+  accessToken: String!
+}

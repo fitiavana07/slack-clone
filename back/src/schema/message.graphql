@@ -1,0 +1,18 @@
+type Message implements Node {
+  id: ID!
+  content: String!
+  author: User!
+  createdAt: Date!
+  updatedAt: Date!
+  """dm or channel"""
+  destType: MessageDestinationType!
+  """destination if it is a dm"""
+  destUser: User
+  """destination if it is a channel message"""
+  destChannel: Channel
+}
+
+enum MessageDestinationType {
+  DIRECT_MESSAGE
+  CHANNEL_MESSAGE
+}

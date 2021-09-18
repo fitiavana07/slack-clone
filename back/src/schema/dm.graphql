@@ -1,0 +1,9 @@
+input SendDMInput {
+  messageContent: String!
+  """userID to send the message to"""
+  destID: ID!
+}
+
+type SendDMPayload {
+  message: Message!
+}

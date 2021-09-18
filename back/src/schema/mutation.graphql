@@ -1,0 +1,5 @@
+type Mutation {
+  signup(input: SignupInput!): SignupPayload!
+  login(input: LoginInput!): LoginPayload!
+  sendDM(input: SendDMInput!): SendDMPayload!
+}
