@@ -10,7 +10,7 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
       <button
         type="submit"
         className={clsx([
-          'w-full px-4 py-2 text-sm font-medium font-semibold text-white uppercase rounded-md ',
+          'w-full px-4 py-2 text-sm font-medium font-semibold text-white uppercase rounded-sm',
           loading
             ? 'bg-blue-100 cursor-wait'
             : 'bg-blue-600 transition-colors duration-200 transform hover:bg-blue-500 focus:outline-none focus:bg-blue-500',

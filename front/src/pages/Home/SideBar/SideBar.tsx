@@ -19,7 +19,7 @@ const SideBar: FC<SideBarProps> = ({
   return (
     <Container>
       <Link to="/">
-        <H2>Slack Clone</H2>
+        <H2 className="text-white">Slack Clone</H2>
       </Link>
 
       <div className="flex flex-col justify-between flex-1 mt-6">

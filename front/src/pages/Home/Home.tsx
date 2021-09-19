@@ -1,4 +1,3 @@
-import H4 from 'components/H4'
 import React, { useMemo } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { useChannels } from 'services/messages'

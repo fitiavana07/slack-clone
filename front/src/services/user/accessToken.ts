@@ -1,5 +1,5 @@
 import { AUTH_TOKEN_COOKIE_KEY, CLIENT_DOMAIN } from 'config'
-import { writeCookie } from 'utils/cookie'
+import { deleteCookie, writeCookie } from 'utils/cookie'
 
 const MAX_AGE = 30 * 24 * 60 * 60 // 30 days
 
@@ -10,4 +10,8 @@ export const saveAccessToken = (accessToken: string): void => {
     domain: CLIENT_DOMAIN,
     maxAge: MAX_AGE,
   })
+}
+
+export const clearAccessToken = (): void => {
+  deleteCookie(AUTH_TOKEN_COOKIE_KEY)
 }

@@ -10,8 +10,8 @@ const NewChannelButton: FC = () => {
   return (
     <Link
       className={clsx(
-        'flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700',
-        match && 'bg-gray-300',
+        'flex items-center px-4 py-2 text-white transition-colors duration-200 hover:bg-blue-900 hover:text-gray-100 bg-blue-800',
+        match && 'bg-gray-700',
       )}
       href="#"
       to="/new-channel"

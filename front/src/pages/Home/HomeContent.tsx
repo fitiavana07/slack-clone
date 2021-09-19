@@ -14,9 +14,9 @@ const HomeContent: FC = () => (
     </p>
     <p>
       Created channels are listed under{' '}
-      <b className="font-semibold">CHANNELS</b>
+      <b className="font-semibold">CHANNELS</b>.
     </p>
-    <p className="mt-8 text-gray-500">
+    <p className="mt-8 text-gray-600">
       Slack Clone made by{' '}
       <a
         className="font-semibold hover:underline"

@@ -18,9 +18,9 @@ const useValueInput = (
 } => {
   const [value, setValue] = useState(initialValue)
   // TODO isDirty
-  const [isDirty, setIsDirty] = useState(false)
+  const [isDirty] = useState(false)
   // TODO isValid
-  const [isValid, setIsValid] = useState(false)
+  const [isValid] = useState(false)
 
   const handleChange = useCallback<HandleChangeType>(
     (e) => setValue(e.target.value),

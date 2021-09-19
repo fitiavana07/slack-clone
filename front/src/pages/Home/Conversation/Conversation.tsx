@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import { ConversationProps } from './Conversation.props'
 import MessageView from './MessageView'
 import TobBar from './TopBar'
