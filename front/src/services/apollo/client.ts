@@ -5,6 +5,7 @@ import {
   from,
   HttpLink,
 } from '@apollo/client'
+import createAuthLink from './authLink'
 import { createErrorLink } from './errorLink'
 
 type CreateClientType = (
@@ -17,12 +18,12 @@ export const createClient: CreateClientType = (
   token: string | null,
 ) => {
   const errorLink = createErrorLink()
+  const authLink = createAuthLink(token)
   const httpLink = new HttpLink({ uri })
   const cache = new InMemoryCache()
 
   return new ApolloClient({
-    link: from([errorLink, httpLink]),
+    link: from([errorLink, authLink, httpLink]),
     cache: cache,
-    headers: token ? { authorization: token } : undefined,
   })
 }

@@ -7,6 +7,7 @@ import {
   OperationError,
   OperationResult,
 } from 'services/operation'
+import { saveAccessToken } from './accessToken'
 
 const useLogin = (args: {
   email: string
@@ -38,6 +39,11 @@ const useLogin = (args: {
             })
         }
       }
+    },
+    onCompleted: (data) => {
+      const accessToken = data.login.accessToken
+      saveAccessToken(accessToken)
+      window.location.reload()
     },
   })
 

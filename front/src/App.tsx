@@ -7,6 +7,7 @@ import Home from 'pages/Home'
 import { AUTH_TOKEN_COOKIE_KEY, GRAPHQL_URL } from 'config'
 import { readCookie } from 'utils/cookie'
 import { createClient } from 'services/apollo'
+import Signup from 'pages/Signup'
 
 const token = readCookie(AUTH_TOKEN_COOKIE_KEY)
 const apolloClient = createClient(GRAPHQL_URL, token)
@@ -21,6 +22,9 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/login">
             <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
           </Route>
         </Switch>
       </BrowserRouter>

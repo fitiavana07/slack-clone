@@ -1,8 +1,8 @@
 import { OperationError } from './error'
 
-export type OperationResult<LoginErrorCodes> = {
+export type OperationResult<ErrorCodes> = {
   loading: boolean
-  error?: OperationError<LoginErrorCodes>
+  error?: OperationError<ErrorCodes>
 }
 // type Result = Omit<MutationResult, 'data' | 'error'> & {
 //   error?: OperationError
