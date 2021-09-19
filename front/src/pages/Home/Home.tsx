@@ -34,6 +34,7 @@ const Home: React.FC = () => {
         dmUsers={dmUsers}
         channels={channels}
         loadingChannels={loadingChannels}
+        currentUser={currentUser}
       />
       <Switch>
         <Route path="/dm/:destID">

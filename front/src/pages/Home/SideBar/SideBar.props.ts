@@ -6,6 +6,7 @@ type SideBarProps = {
   loadingDMUsers: boolean
   channels: PartialChannel[]
   loadingChannels: boolean
+  currentUser: User
 }
 
 export default SideBarProps

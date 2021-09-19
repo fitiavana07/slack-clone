@@ -12,6 +12,7 @@ const SideBar: FC<SideBarProps> = ({
   loadingDMUsers,
   loadingChannels,
   channels,
+  currentUser,
 }) => {
   return (
     <Container>
@@ -45,7 +46,10 @@ const SideBar: FC<SideBarProps> = ({
           </div>
         </nav>
 
-        {/* <ProfilePreview fullName={'Fitiavana Ramanandafy'} /> */}
+        <ProfilePreview
+          fullName={currentUser.fullName}
+          username={currentUser.username}
+        />
       </div>
     </Container>
   )
