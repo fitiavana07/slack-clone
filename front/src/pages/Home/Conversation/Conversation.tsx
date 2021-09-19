@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactElement, useEffect, useRef } from 'react'
 import { ConversationProps } from './Conversation.props'
 import MessageView from './MessageView'
 import TobBar from './TopBar'
@@ -10,6 +10,11 @@ const Conversation: FC<ConversationProps> = ({
   sendMessage,
   sendMessageLoading,
 }) => {
+  const bottomRef = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+    console.log('ehy')
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  })
   return (
     <div className="flex flex-col w-full h-screen">
       <TobBar />
@@ -18,6 +23,7 @@ const Conversation: FC<ConversationProps> = ({
         {messages.map((m) => {
           return <MessageView key={m.id} message={m} />
         })}
+        <div id="bottom-of-the-screen-to-scroll" ref={bottomRef}></div>
       </div>
       <WritingBar
         sendMessage={sendMessage}
