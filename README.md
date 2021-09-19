@@ -30,7 +30,7 @@ Then, run the frontend.
 cd front && npm i && npm start
 ```
 
-### 
+The frontend and the backend has been written using Node v16.8.0, and has been verified to also work on Node v14.15.1.
 
 ## Working Features
 
