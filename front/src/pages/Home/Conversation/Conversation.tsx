@@ -22,6 +22,17 @@ const Conversation: FC<ConversationProps> = ({
         {messages.map((m) => {
           return <MessageView key={m.id} message={m} />
         })}
+        {!loading && messages.length === 0 ? (
+          <div>
+            <h5 className="text-lg font-semibold">
+              Welcome to this fresh new conversation
+            </h5>
+            <p>
+              You can start sending messages using the text input at the
+              bottom.
+            </p>
+          </div>
+        ) : null}
         <div id="bottom-of-the-screen-to-scroll" ref={bottomRef}></div>
       </div>
       <WritingBar

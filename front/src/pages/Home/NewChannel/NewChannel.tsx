@@ -1,6 +1,7 @@
+import React, { FC } from 'react'
 import ActionButton from 'components/ActionButton'
 import H4 from 'components/H4'
-import React, { FC } from 'react'
+import { useHistory } from 'react-router-dom'
 import useCreateChannel from 'services/messages/useCreateChannel'
 import { useOnSubmit, useValueInput } from 'utils/forms'
 
@@ -10,7 +11,14 @@ const NewChannel: FC = () => {
     handleChange: handleChangeChannelName,
     reset: resetChannelName,
   } = useValueInput('')
-  const [createChannel, { loading }] = useCreateChannel()
+
+  const history = useHistory()
+
+  const [createChannel, { loading }] = useCreateChannel({
+    onCompleted: (newChannelID) => {
+      history.push(`/channel/${newChannelID}`)
+    },
+  })
   const onSubmit = useOnSubmit(() => {
     createChannel(channelName)
     resetChannelName()

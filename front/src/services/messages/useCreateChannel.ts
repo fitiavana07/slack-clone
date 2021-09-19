@@ -7,10 +7,9 @@ import {
 import { OperationResult } from 'services/operation'
 import { QUERY_CHANNELS } from './useChannels'
 
-const useCreateChannel = (): [
-  (name: string) => void,
-  OperationResult<undefined>,
-] => {
+const useCreateChannel = (options?: {
+  onCompleted?: (channelID: string) => void
+}): [(name: string) => void, OperationResult<undefined>] => {
   const [mutate, { loading }] = useMutation<
     CreateChannelMutation,
     CreateChannelMutationVariables
@@ -32,6 +31,11 @@ const useCreateChannel = (): [
           channels: [...channels, newChannel],
         },
       })
+    },
+    onCompleted: (data) => {
+      if (options?.onCompleted) {
+        options.onCompleted(data.addChannel.channel.id)
+      }
     },
   })
 

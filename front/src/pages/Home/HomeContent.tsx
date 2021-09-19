@@ -9,7 +9,7 @@ const HomeContent: FC = () => (
       sidebar and start sending messages.
     </p>
     <p>
-      Only signed up users are listed in{' '}
+      Only signed up users are listed under{' '}
       <b className="font-semibold">DIRECT MESSAGES</b>.
     </p>
     <p>
