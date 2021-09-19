@@ -12,7 +12,6 @@ const Conversation: FC<ConversationProps> = ({
 }) => {
   const bottomRef = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
-    console.log('ehy')
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   })
   return (

@@ -56,6 +56,9 @@ const SEND_DM = gql`
         author {
           id
         }
+        destUser {
+          id
+        }
       }
     }
   }

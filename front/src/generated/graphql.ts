@@ -231,6 +231,22 @@ export type DMsQuery = {
   >
 }
 
+export type NewDMsSubscriptionVariables = Exact<{
+  destID: Scalars['ID']
+}>
+
+export type NewDMsSubscription = {
+  __typename?: 'Subscription'
+  newDM?: Maybe<{
+    __typename?: 'Message'
+    id: string
+    content: string
+    createdAt: any
+    author: { __typename?: 'User'; id: string }
+    destUser?: Maybe<{ __typename?: 'User'; id: string }>
+  }>
+}
+
 export type SendChanelMessageMutationVariables = Exact<{
   messageContent: Scalars['String']
   destID: Scalars['ID']
@@ -265,6 +281,7 @@ export type SendDmMutation = {
       content: string
       createdAt: any
       author: { __typename?: 'User'; id: string }
+      destUser?: Maybe<{ __typename?: 'User'; id: string }>
     }
   }
 }
