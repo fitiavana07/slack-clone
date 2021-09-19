@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import React, { FC, ReactElement } from 'react'
+import clsx from 'clsx'
 import { Link, LinkProps, useRouteMatch } from 'react-router-dom'
 
 export type DiscussionLinkProps = {

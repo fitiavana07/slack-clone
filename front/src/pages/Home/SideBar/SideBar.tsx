@@ -24,13 +24,11 @@ const SideBar: FC<SideBarProps> = ({
               Direct Messages {loadingDMUsers ? ' - Loading...' : ''}
             </GroupTitle>
 
-            {dmUsers.map(({ id, fullName }) => {
-              return (
-                <DMDiscussionLink key={id} to={'/dm/' + id}>
-                  {fullName}
-                </DMDiscussionLink>
-              )
-            })}
+            {dmUsers.map(({ id, username }) => (
+              <DMDiscussionLink key={id} to={'/dm/' + id}>
+                {username}
+              </DMDiscussionLink>
+            ))}
           </div>
           <hr className="my-4 dark:border-gray-600" />
 
@@ -47,7 +45,7 @@ const SideBar: FC<SideBarProps> = ({
           </div>
         </nav>
 
-        <ProfilePreview fullName={'Fitiavana Ramanandafy'} />
+        {/* <ProfilePreview fullName={'Fitiavana Ramanandafy'} /> */}
       </div>
     </Container>
   )

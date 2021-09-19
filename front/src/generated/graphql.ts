@@ -173,6 +173,27 @@ export type User = Node & {
   fullName: Scalars['String']
 }
 
+export type ChannelMessagesQueryVariables = Exact<{
+  channelID: Scalars['ID']
+}>
+
+export type ChannelMessagesQuery = {
+  __typename?: 'Query'
+  channel?: Maybe<{
+    __typename?: 'Channel'
+    id: string
+    messages?: Maybe<
+      Array<{
+        __typename?: 'Message'
+        id: string
+        content: string
+        createdAt: any
+        author: { __typename?: 'User'; id: string }
+      }>
+    >
+  }>
+}
+
 export type ChannelsQueryVariables = Exact<{ [key: string]: never }>
 
 export type ChannelsQuery = {

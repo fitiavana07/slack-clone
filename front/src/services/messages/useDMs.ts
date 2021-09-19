@@ -1,15 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
-import { DMsQuery, DMsQueryVariables, Maybe } from 'generated/graphql'
+import { DMsQuery, DMsQueryVariables } from 'generated/graphql'
 import { OperationResult } from 'services/operation'
+import { PartialMessage } from './partialMessage'
 
-export type PartialMessage = {
-  __typename?: 'Message'
-  id: string
-  content: string
-  createdAt: any
-  author: { __typename?: 'User'; id: string }
-  destUser?: Maybe<{ __typename?: 'User'; id: string }>
-}
 const useDMs = (
   destID: string,
 ): [Array<PartialMessage>, OperationResult<undefined>] => {

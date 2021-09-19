@@ -4,7 +4,7 @@ import moment from 'moment'
 
 const TimeView: FC<TimeViewProps> = ({ time }) => {
   const shownTime = useMemo<string>(() => {
-    return moment(time).format('hh:mm A')
+    return moment(time).format('ddd. MMM Do, YYYY - hh:mm A')
   }, [time])
   return <span className="mx-2 text-sm text-gray-500">{shownTime}</span>
 }
