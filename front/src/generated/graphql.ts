@@ -168,6 +168,13 @@ export type User = Node & {
   fullName: Scalars['String']
 }
 
+export type ChannelsQueryVariables = Exact<{ [key: string]: never }>
+
+export type ChannelsQuery = {
+  __typename?: 'Query'
+  channels?: Maybe<Array<{ __typename?: 'Channel'; id: string; name: string }>>
+}
+
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>
 
 export type CurrentUserQuery = {
@@ -201,4 +208,19 @@ export type SignupMutationVariables = Exact<{
 export type SignupMutation = {
   __typename?: 'Mutation'
   signup: { __typename?: 'SignupPayload'; accessToken: string }
+}
+
+export type UsersQueryVariables = Exact<{ [key: string]: never }>
+
+export type UsersQuery = {
+  __typename?: 'Query'
+  users?: Maybe<
+    Array<{
+      __typename?: 'User'
+      id: string
+      email: string
+      username: string
+      fullName: string
+    }>
+  >
 }

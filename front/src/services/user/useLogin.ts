@@ -52,7 +52,7 @@ const useLogin = (args: {
 
 export default useLogin
 
-export const LOGIN = gql`
+const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login(input: { email: $email, password: $password }) {
       accessToken

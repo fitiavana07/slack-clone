@@ -13,7 +13,7 @@ const useCurrentUser = (): [
 
 export default useCurrentUser
 
-export const QUERY_CURRENT_USER = gql`
+const QUERY_CURRENT_USER = gql`
   query CurrentUser {
     currentUser {
       id

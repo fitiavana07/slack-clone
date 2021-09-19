@@ -50,7 +50,7 @@ const useSignup = (args: {
   return [mutate, { loading, error }]
 }
 
-export const SIGNUP = gql`
+const SIGNUP = gql`
   mutation Signup(
     $fullName: String!
     $username: String!
