@@ -219,6 +219,38 @@ export type DMsQuery = {
   >
 }
 
+export type SendChanelMessageMutationVariables = Exact<{
+  messageContent: Scalars['String']
+  destID: Scalars['ID']
+}>
+
+export type SendChanelMessageMutation = {
+  __typename?: 'Mutation'
+  sendChannelMessage: {
+    __typename?: 'SendChannelMessagePayload'
+    message: { __typename?: 'Message'; id: string }
+  }
+}
+
+export type SendDmMutationVariables = Exact<{
+  messageContent: Scalars['String']
+  destID: Scalars['ID']
+}>
+
+export type SendDmMutation = {
+  __typename?: 'Mutation'
+  sendDM: {
+    __typename?: 'SendDMPayload'
+    message: {
+      __typename?: 'Message'
+      id: string
+      content: string
+      createdAt: any
+      author: { __typename?: 'User'; id: string }
+    }
+  }
+}
+
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>
 
 export type CurrentUserQuery = {

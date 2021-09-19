@@ -9,6 +9,7 @@ const useValueInput = (
 ): {
   value: string
   handleChange: HandleChangeType
+  reset: () => void
   state: {
     isDirty: boolean
     isValid: boolean
@@ -25,11 +26,13 @@ const useValueInput = (
     (e) => setValue(e.target.value),
     [setValue],
   )
+  const reset = () => setValue('')
   return {
     value,
     handleChange,
     state: { isDirty, isValid },
     errors: null,
+    reset,
   }
 }
 

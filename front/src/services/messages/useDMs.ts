@@ -14,7 +14,7 @@ const useDMs = (
 
 export default useDMs
 
-const QUERY_DMS = gql`
+export const QUERY_DMS = gql`
   query DMs($destID: ID!) {
     dms(destID: $destID) {
       id
