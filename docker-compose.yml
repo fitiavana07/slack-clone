@@ -23,6 +23,9 @@ services:
       - 4000:4000
     volumes:
       - ./back:/app
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/slack-clone
+      REDIS_HOST: redis
   redis:
     image: redis:6.0-alpine
     ports:
