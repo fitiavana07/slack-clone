@@ -168,7 +168,12 @@ export type SignupPayload = {
 
 export type Subscription = {
   __typename?: 'Subscription'
+  newChannelMessage?: Maybe<Message>
   newDM?: Maybe<Message>
+}
+
+export type SubscriptionNewChannelMessageArgs = {
+  channelID: Scalars['ID']
 }
 
 export type SubscriptionNewDmArgs = {
@@ -527,6 +532,13 @@ export type SubscriptionResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
 > = {
+  newChannelMessage?: SubscriptionResolver<
+    Maybe<ResolversTypes['Message']>,
+    'newChannelMessage',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionNewChannelMessageArgs, 'channelID'>
+  >
   newDM?: SubscriptionResolver<
     Maybe<ResolversTypes['Message']>,
     'newDM',

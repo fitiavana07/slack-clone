@@ -7,7 +7,7 @@ import { UserDoc } from '../user/doc'
 import { ChannelDoc, ChannelModel } from './channels'
 import { MessageDoc } from './doc'
 import { MessageModel } from './model'
-import { TOPIC_NEW_DM } from './pubsub'
+import { TOPIC_NEW_CHANNEL_MESSAGE, TOPIC_NEW_DM } from './pubsub'
 
 export default class MessageService {
   private messageModel: MessageModel
@@ -125,12 +125,22 @@ export default class MessageService {
       throw new UnauthenticatedError()
     }
 
-    return await new this.messageModel({
+    const message = await new this.messageModel({
       content: messageContent,
       authorID: context.userID,
       destType: MessageDestinationType.ChannelMessage,
       destID: destID,
     }).save()
+
+    context.pubsub.publish(TOPIC_NEW_CHANNEL_MESSAGE, {
+      newChannelMessage: {
+        ...message.toObject(),
+        authorID: message.authorID,
+        id: message.id,
+      },
+    })
+
+    return message
   }
 
   async findChannelMessages(

@@ -1,3 +1,4 @@
 type Subscription {
   newDM(destID: ID!): Message
+  newChannelMessage(channelID: ID!): Message
 }
