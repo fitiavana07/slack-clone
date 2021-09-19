@@ -54,3 +54,33 @@ The frontend and the backend has been written using Node v16.8.0, and has been v
 
 - JWT
 - Tailwind CSS
+
+## Some screenshots
+
+### Sign up
+
+![signup](./screenshots/signup.png)
+
+### Login
+
+![login](./screenshots/login.png)
+
+### Welcome
+
+![welcome](./screenshots/welcome.png)
+
+### New Channel
+
+![new-channel](./screenshots/new-channel.png)
+
+### Channel Created
+
+![channel-created](./screenshots/created-channel.png)
+
+### Direct Messages with realtime updates
+
+![direct-messages](./screenshots/dms-with-realtime.png)
+
+### Messages in Channels
+
+![messages-in-channels](./screenshots/multipane.png)
