@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ts-node-dev src/index.ts",
+    "start:prod": "node build/index.js",
     "build": "tsc",
     "g": "graphql-codegen",
     "eslint": "eslint --fix"

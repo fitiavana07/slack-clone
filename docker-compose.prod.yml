@@ -35,6 +35,11 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile
+      args:
+        REACT_APP_GRAPHQL_URL: https://slack-clone-graphql.fitiavana.icu/graphql
+        REACT_APP_SUBSCRIPTION_URL: wss://slack-clone-graphql.fitiavana.icu/graphql
+        REACT_APP_DOMAIN_NAME: fitiavana.icu
+        REACT_APP_CLIENT_DOMAIN: slack-clone.fitiavana.icu
     labels:
       - traefik.http.routers.graphqlapi-router.rule=Host(`slack-clone.fitiavana.icu`)
       - traefik.http.routers.graphqlapi-router.tls=true
