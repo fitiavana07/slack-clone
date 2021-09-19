@@ -1,18 +1,26 @@
-export {}
-export const getUser = (userID: string) => {
-  // TODO
-}
-export const getUsers = (options: PaginationOptions) => {
-  // TODO
-}
-// TODO move into a common directory, eg: services/common/
-interface PaginationOptions {
-  first?: number
-  after?: string
-  before?: string
-  last?: number
-  // TODO get from Sort enum from graphqlapi
-  sort?: Sort
+import { gql, useQuery } from '@apollo/client'
+import { User, UserQuery, UserQueryVariables } from 'generated/graphql'
+import { OperationResult } from 'services/operation'
+
+// will use cache when already queried once
+const useUser = (id: string): [User | null, OperationResult<undefined>] => {
+  const { data, loading } = useQuery<UserQuery, UserQueryVariables>(
+    QUERY_USER,
+    { variables: { id } },
+  )
+
+  return [data?.user || null, { loading }]
 }
 
-enum Sort {}
+const QUERY_USER = gql`
+  query User($id: ID!) {
+    user(id: $id) {
+      id
+      email
+      username
+      fullName
+    }
+  }
+`
+
+export default useUser

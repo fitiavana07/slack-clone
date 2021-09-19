@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import { useChannels } from 'services/messages'
 import { useCurrentUser, useUsers } from 'services/user'
+import ChannelConversation from './Conversation/ChannelConversation'
+import DMConversation from './Conversation/DMConversation'
 import SideBar from './SideBar'
 
 const Home: React.FC = () => {
@@ -26,12 +28,22 @@ const Home: React.FC = () => {
 
   // return <SideBar {...{ dmUsers }} />
   return (
-    <SideBar
-      loadingDMUsers={loadingDMUsers}
-      dmUsers={dmUsers}
-      channels={channels}
-      loadingChannels={loadingChannels}
-    />
+    <div className="flex flex-row">
+      <SideBar
+        loadingDMUsers={loadingDMUsers}
+        dmUsers={dmUsers}
+        channels={channels}
+        loadingChannels={loadingChannels}
+      />
+      <Switch>
+        <Route path="/dm/:destID">
+          <DMConversation />
+        </Route>
+        <Route path="/channel/:channelID">
+          <ChannelConversation />
+        </Route>
+      </Switch>
+    </div>
   )
 }
 export default Home

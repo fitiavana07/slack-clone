@@ -17,14 +17,14 @@ const App: React.FC = () => {
     <ApolloProvider client={apolloClient}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
           <Route exact path="/login">
             <Login />
           </Route>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+          <Route path="/">
+            <Home />
           </Route>
         </Switch>
       </BrowserRouter>

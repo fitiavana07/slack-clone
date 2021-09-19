@@ -103,10 +103,15 @@ export type Query = {
   __typename?: 'Query'
   currentUser?: Maybe<User>
   users?: Maybe<Array<User>>
+  user?: Maybe<User>
   /** Direct messages */
   dms?: Maybe<Array<Message>>
   channels?: Maybe<Array<Channel>>
   channel?: Maybe<Channel>
+}
+
+export type QueryUserArgs = {
+  id: Scalars['ID']
 }
 
 export type QueryDmsArgs = {
@@ -175,6 +180,24 @@ export type ChannelsQuery = {
   channels?: Maybe<Array<{ __typename?: 'Channel'; id: string; name: string }>>
 }
 
+export type DMsQueryVariables = Exact<{
+  destID: Scalars['ID']
+}>
+
+export type DMsQuery = {
+  __typename?: 'Query'
+  dms?: Maybe<
+    Array<{
+      __typename?: 'Message'
+      id: string
+      content: string
+      createdAt: any
+      author: { __typename?: 'User'; id: string }
+      destUser?: Maybe<{ __typename?: 'User'; id: string }>
+    }>
+  >
+}
+
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>
 
 export type CurrentUserQuery = {
@@ -208,6 +231,21 @@ export type SignupMutationVariables = Exact<{
 export type SignupMutation = {
   __typename?: 'Mutation'
   signup: { __typename?: 'SignupPayload'; accessToken: string }
+}
+
+export type UserQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type UserQuery = {
+  __typename?: 'Query'
+  user?: Maybe<{
+    __typename?: 'User'
+    id: string
+    email: string
+    username: string
+    fullName: string
+  }>
 }
 
 export type UsersQueryVariables = Exact<{ [key: string]: never }>
