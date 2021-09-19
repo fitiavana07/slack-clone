@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken'
 import { ApolloError } from 'apollo-server-core'
 import { JWTPayload } from './jwt'
 import Context from '../../context'
-import { UnauthenticatedError } from './errors'
 import { Types } from 'mongoose'
 
 export default class UserService {
@@ -29,6 +28,13 @@ export default class UserService {
   async signupAndLogin(
     args: Pick<UserDoc, 'email' | 'fullName' | 'password' | 'username'>,
   ): Promise<string> {
+    if (await this._findByEmail(args.email)) {
+      throw new ApolloError('Email already used', 'EMAIL_ALREADY_USED')
+    }
+    if (await this._findByUsername(args.username)) {
+      throw new ApolloError('Username already used', 'USERNAME_ALREADY_USED')
+    }
+
     const hashedPassword = await bcrypt.hash(args.password, 10)
     const user = await new this.userModel({
       ...args,
@@ -67,6 +73,10 @@ export default class UserService {
     return await this.userModel.findOne({ email })
   }
 
+  async _findByUsername(username: string): Promise<UserDoc | null> {
+    return await this.userModel.findOne({ username })
+  }
+
   async findByID(id: Types.ObjectId): Promise<UserDoc | null> {
     return await this.userModel.findById(id)
   }
@@ -77,7 +87,7 @@ export default class UserService {
 
   async getMe(context: Context): Promise<UserDoc | null> {
     if (!context.userID) {
-      throw new UnauthenticatedError()
+      return null
     }
     return await this.findByID(context.userID)
   }
