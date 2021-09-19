@@ -24,9 +24,9 @@ services:
       context: ./back
       dockerfile: prod.Dockerfile
     labels:
-      - traefik.http.routers.graphqlapi-router.rule=Host(`slack-clone-graphql.fitiavana.icu`)
-      - traefik.http.routers.graphqlapi-router.tls=true
-      - traefik.http.routers.graphqlapi-router.tls.certresolver=myresolver
+      - traefik.http.routers.back-router.rule=Host(`slack-clone-graphql.fitiavana.icu`)
+      - traefik.http.routers.back-router.tls=true
+      - traefik.http.routers.back-router.tls.certresolver=myresolver
     environment:
       MONGODB_URI: mongodb://mongo:27017/slack-clone
       REDIS_HOST: redis
@@ -41,9 +41,9 @@ services:
         REACT_APP_DOMAIN_NAME: fitiavana.icu
         REACT_APP_CLIENT_DOMAIN: slack-clone.fitiavana.icu
     labels:
-      - traefik.http.routers.graphqlapi-router.rule=Host(`slack-clone.fitiavana.icu`)
-      - traefik.http.routers.graphqlapi-router.tls=true
-      - traefik.http.routers.graphqlapi-router.tls.certresolver=myresolver
+      - traefik.http.routers.front-router.rule=Host(`slack-clone.fitiavana.icu`)
+      - traefik.http.routers.front-router.tls=true
+      - traefik.http.routers.front-router.tls.certresolver=myresolver
     environment:
       REACT_APP_GRAPHQL_URL: https://slack-clone-graphql.fitiavana.icu/graphql
       REACT_APP_SUBSCRIPTION_URL: wss://slack-clone-graphql.fitiavana.icu/graphql
