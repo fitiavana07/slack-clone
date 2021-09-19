@@ -30,16 +30,19 @@ const useSendChannelMessage = (
       })
       const messages = queryData?.channel?.messages || []
 
-      cache.writeQuery<ChannelMessagesQuery, ChannelMessagesQueryVariables>({
-        query: QUERY_CHANNEL_MESSAGES,
-        variables: { channelID },
-        data: {
-          channel: {
-            id: channelID,
-            messages: [...messages, newMessage],
+      if (!messages.find((m) => m.id === newMessage.id)) {
+        // not yet in the cache
+        cache.writeQuery<ChannelMessagesQuery, ChannelMessagesQueryVariables>({
+          query: QUERY_CHANNEL_MESSAGES,
+          variables: { channelID },
+          data: {
+            channel: {
+              id: channelID,
+              messages: [...messages, newMessage],
+            },
           },
-        },
-      })
+        })
+      }
     },
     // TODO onError
   })

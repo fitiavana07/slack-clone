@@ -27,13 +27,16 @@ const useSendDM = (
       })
       const messages = queryData?.dms || []
 
-      cache.writeQuery<DMsQuery, DMsQueryVariables>({
-        query: QUERY_DMS,
-        variables: { destID },
-        data: {
-          dms: [...messages, newMessage],
-        },
-      })
+      if (!messages.find((m) => m.id === newMessage.id)) {
+        // not yet in the cache
+        cache.writeQuery<DMsQuery, DMsQueryVariables>({
+          query: QUERY_DMS,
+          variables: { destID },
+          data: {
+            dms: [...messages, newMessage],
+          },
+        })
+      }
     },
     // TODO onError
   })

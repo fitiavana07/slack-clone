@@ -159,10 +159,15 @@ export type SignupPayload = {
 export type Subscription = {
   __typename?: 'Subscription'
   newDM?: Maybe<Message>
+  newChannelMessage?: Maybe<Message>
 }
 
 export type SubscriptionNewDmArgs = {
   destID: Scalars['ID']
+}
+
+export type SubscriptionNewChannelMessageArgs = {
+  channelID: Scalars['ID']
 }
 
 export type User = Node & {
@@ -191,6 +196,21 @@ export type ChannelMessagesQuery = {
         author: { __typename?: 'User'; id: string }
       }>
     >
+  }>
+}
+
+export type NewChannelMessageSubscriptionVariables = Exact<{
+  channelID: Scalars['ID']
+}>
+
+export type NewChannelMessageSubscription = {
+  __typename?: 'Subscription'
+  newChannelMessage?: Maybe<{
+    __typename?: 'Message'
+    id: string
+    content: string
+    createdAt: any
+    author: { __typename?: 'User'; id: string }
   }>
 }
 

@@ -5,6 +5,7 @@ import { useChannels } from 'services/messages'
 import { useCurrentUser, useUsers } from 'services/user'
 import ChannelConversation from './Conversation/ChannelConversation'
 import DMConversation from './Conversation/DMConversation'
+import HomeContent from './HomeContent'
 import NewChannel from './NewChannel'
 import SideBar from './SideBar'
 
@@ -49,30 +50,7 @@ const Home: React.FC = () => {
           <NewChannel />
         </Route>
         <Route path="/">
-          <div className="flex flex-col w-full h-screen px-8 py-8">
-            <H4>Welcome to Slack Clone</H4>
-            <p>
-              Open one of the <b className="font-semibold">conversations</b> in
-              the sidebar and start sending messages.
-            </p>
-            <p>
-              Only signed up users are listed in
-              <b className="font-semibold">DIRECT MESSAGES</b>.
-            </p>
-            <p>
-              Created channels are listed under{' '}
-              <b className="font-semibold">CHANNELS</b>
-            </p>
-            <p className="mt-8 text-gray-500">
-              Slack Clone made by{' '}
-              <a
-                className="font-semibold hover:underline"
-                href="https://github.com/fitiavana07"
-              >
-                Fitiavana Ramanandafy
-              </a>
-            </p>
-          </div>
+          <HomeContent />
         </Route>
       </Switch>
     </div>

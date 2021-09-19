@@ -24,7 +24,7 @@ const useDMs = (
 
   const subscribe = () =>
     subscribeToMore<NewDMsSubscription, NewDMsSubscriptionVariables>({
-      document: DM_SUBSCRIPTION,
+      document: SUBSCRIPTION_DM,
       variables: { destID },
       updateQuery: (previous, { subscriptionData }) => {
         if (!subscriptionData?.data?.newDM) {
@@ -33,7 +33,7 @@ const useDMs = (
         const messages = previous.dms || []
         const newMessage = subscriptionData.data.newDM
         if (messages.find((m) => m.id === newMessage.id)) {
-          // already here
+          // the message is already here
           return previous
         }
         return {
@@ -63,7 +63,7 @@ export const QUERY_DMS = gql`
   }
 `
 
-const DM_SUBSCRIPTION = gql`
+const SUBSCRIPTION_DM = gql`
   subscription NewDMs($destID: ID!) {
     newDM(destID: $destID) {
       id

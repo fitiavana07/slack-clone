@@ -37,6 +37,7 @@ const WritingBar: FC<WritingBarProps> = ({
             value={message}
             onChange={handleChangeMessage}
             disabled={sendMessageLoading}
+            autoFocus
           />
           <button
             type="submit"
