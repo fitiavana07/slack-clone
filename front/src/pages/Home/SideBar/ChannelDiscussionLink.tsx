@@ -4,6 +4,6 @@ import DiscussionLink, { DiscussionLinkProps } from './DiscussionLink'
 
 const ChannelDiscussionLink: FC<Omit<DiscussionLinkProps, 'icon'>> = (
   props,
-) => <DiscussionLink icon={<UsersIcon className="w-5 h-5" />} {...props} />
+) => <DiscussionLink icon={<UsersIcon className="w-4 h-4" />} {...props} />
 
 export default ChannelDiscussionLink

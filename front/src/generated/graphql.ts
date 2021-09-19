@@ -201,6 +201,18 @@ export type ChannelsQuery = {
   channels?: Maybe<Array<{ __typename?: 'Channel'; id: string; name: string }>>
 }
 
+export type CreateChannelMutationVariables = Exact<{
+  name: Scalars['String']
+}>
+
+export type CreateChannelMutation = {
+  __typename?: 'Mutation'
+  addChannel: {
+    __typename?: 'AddChannelPayload'
+    channel: { __typename?: 'Channel'; id: string; name: string }
+  }
+}
+
 export type DMsQueryVariables = Exact<{
   destID: Scalars['ID']
 }>

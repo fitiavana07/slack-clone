@@ -7,7 +7,7 @@ type ProfilePreviewProps = {
 }
 
 const ProfilePreview: FC<ProfilePreviewProps> = ({ fullName, username }) => (
-  <div className="flex items-center px-4 -mx-2">
+  <div className="flex items-center mt-12">
     <UserIcon className="mx-2 w-7 h-7" />
     <div className="mx-2">
       <p className="text-gray-800 dark:text-gray-200">{fullName}</p>

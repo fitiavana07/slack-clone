@@ -12,7 +12,7 @@ const useChannels = (): [
 
 export default useChannels
 
-const QUERY_CHANNELS = gql`
+export const QUERY_CHANNELS = gql`
   query Channels {
     channels {
       id

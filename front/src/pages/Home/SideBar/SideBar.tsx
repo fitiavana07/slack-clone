@@ -6,6 +6,8 @@ import DMDiscussionLink from './DMDiscussionLink'
 import GroupTitle from './GroupTitle'
 import ProfilePreview from './ProfilePreview'
 import SideBarProps from './SideBar.props'
+import { Link } from 'react-router-dom'
+import NewChannelButton from './NewChannelButton'
 
 const SideBar: FC<SideBarProps> = ({
   dmUsers,
@@ -16,7 +18,9 @@ const SideBar: FC<SideBarProps> = ({
 }) => {
   return (
     <Container>
-      <H2>Slack Clone</H2>
+      <Link to="/">
+        <H2>Slack Clone</H2>
+      </Link>
 
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
@@ -37,12 +41,13 @@ const SideBar: FC<SideBarProps> = ({
             <GroupTitle>
               Channels {loadingChannels ? ' - Loading...' : ''}
             </GroupTitle>
-
             {channels.map(({ id, name }) => (
               <ChannelDiscussionLink key={id} to={'/channel/' + id}>
                 {name}
               </ChannelDiscussionLink>
             ))}
+
+            <NewChannelButton />
           </div>
         </nav>
 

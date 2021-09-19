@@ -17,7 +17,7 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
         ])}
         {...otherProps}
       >
-        {loading ? 'Chargement...' : children}
+        {loading ? 'Loading...' : children}
       </button>
     </div>
   )

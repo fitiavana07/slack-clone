@@ -26,7 +26,7 @@ const DiscussionLink: FC<DiscussionLinkProps> = ({
       {...props}
     >
       {icon}
-      <span className="mx-4 font-medium">{children}</span>
+      <span className="mx-2 font-medium">{children}</span>
     </Link>
   )
 }
