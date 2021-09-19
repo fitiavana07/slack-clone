@@ -4,6 +4,9 @@
 export const GRAPHQL_URL =
   process.env.REACT_APP_GRAPHQL_URL || 'http://localhost:4000/graphql'
 
+export const SUBSCRIPTION_URL =
+  process.env.REACT_APP_SUBSCRIPTION_URL || 'ws://localhost:4000/graphql'
+
 /**
  * AUTH_TOKEN_COOKIE_KEY is the key used to register the authentication token.
  */

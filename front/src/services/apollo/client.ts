@@ -13,18 +13,19 @@ import createWSLink from './wsLink'
 
 type CreateClientType = (
   uri: string,
+  wsURI: string,
   token: string | null,
 ) => ApolloClient<NormalizedCacheObject>
 
 export const createClient: CreateClientType = (
   uri: string,
+  wsURI: string,
   token: string | null,
 ) => {
   const errorLink = createErrorLink()
   const authLink = createAuthLink(token)
   const httpLink = new HttpLink({ uri })
   const cache = new InMemoryCache()
-  const wsURI = 'ws://localhost:4000/graphql'
   const wsLink = createWSLink(wsURI, token)
 
   const link = split(

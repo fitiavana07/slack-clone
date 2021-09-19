@@ -4,13 +4,13 @@ import { ApolloProvider } from '@apollo/client'
 
 import Login from 'pages/Login'
 import Home from 'pages/Home'
-import { AUTH_TOKEN_COOKIE_KEY, GRAPHQL_URL } from 'config'
+import { AUTH_TOKEN_COOKIE_KEY, GRAPHQL_URL, SUBSCRIPTION_URL } from 'config'
 import { readCookie } from 'utils/cookie'
 import { createClient } from 'services/apollo'
 import Signup from 'pages/Signup'
 
 const token = readCookie(AUTH_TOKEN_COOKIE_KEY)
-const apolloClient = createClient(GRAPHQL_URL, token)
+const apolloClient = createClient(GRAPHQL_URL, SUBSCRIPTION_URL, token)
 
 const App: React.FC = () => {
   return (
