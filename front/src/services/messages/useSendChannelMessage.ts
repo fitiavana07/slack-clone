@@ -1,9 +1,12 @@
 import { gql, useMutation } from '@apollo/client'
 import {
+  ChannelMessagesQuery,
+  ChannelMessagesQueryVariables,
   SendChanelMessageMutation,
   SendChanelMessageMutationVariables,
 } from 'generated/graphql'
 import { OperationResult } from 'services/operation'
+import { QUERY_CHANNEL_MESSAGES } from './useChannelMessages'
 
 const useSendChannelMessage = (
   channelID: string,
@@ -12,6 +15,32 @@ const useSendChannelMessage = (
     SendChanelMessageMutation,
     SendChanelMessageMutationVariables
   >(SEND_CHANNEL_MESSAGE, {
+    update: (cache, { data }) => {
+      const newMessage = data?.sendChannelMessage?.message
+      if (!newMessage) {
+        return
+      }
+
+      const queryData = cache.readQuery<
+        ChannelMessagesQuery,
+        ChannelMessagesQueryVariables
+      >({
+        query: QUERY_CHANNEL_MESSAGES,
+        variables: { channelID },
+      })
+      const messages = queryData?.channel?.messages || []
+
+      cache.writeQuery<ChannelMessagesQuery, ChannelMessagesQueryVariables>({
+        query: QUERY_CHANNEL_MESSAGES,
+        variables: { channelID },
+        data: {
+          channel: {
+            id: channelID,
+            messages: [...messages, newMessage],
+          },
+        },
+      })
+    },
     // TODO onError
   })
 
@@ -31,6 +60,11 @@ const SEND_CHANNEL_MESSAGE = gql`
     ) {
       message {
         id
+        content
+        createdAt
+        author {
+          id
+        }
       }
     }
   }

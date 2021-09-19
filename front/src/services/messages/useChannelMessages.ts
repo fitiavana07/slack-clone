@@ -17,7 +17,7 @@ const useChannelMessages = (
   return [data?.channel?.messages || [], { loading }]
 }
 
-const QUERY_CHANNEL_MESSAGES = gql`
+export const QUERY_CHANNEL_MESSAGES = gql`
   query ChannelMessages($channelID: ID!) {
     channel(id: $channelID) {
       id

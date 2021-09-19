@@ -228,7 +228,13 @@ export type SendChanelMessageMutation = {
   __typename?: 'Mutation'
   sendChannelMessage: {
     __typename?: 'SendChannelMessagePayload'
-    message: { __typename?: 'Message'; id: string }
+    message: {
+      __typename?: 'Message'
+      id: string
+      content: string
+      createdAt: any
+      author: { __typename?: 'User'; id: string }
+    }
   }
 }
 
