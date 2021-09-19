@@ -26,16 +26,23 @@ const useDMs = (
     subscribeToMore<NewDMsSubscription, NewDMsSubscriptionVariables>({
       document: SUBSCRIPTION_DM,
       variables: { destID },
-      updateQuery: (previous, { subscriptionData }) => {
+      updateQuery: (previous, { subscriptionData, variables }) => {
         if (!subscriptionData?.data?.newDM) {
           return previous
         }
+
+        if (variables?.destID !== destID) {
+          // wrong destID
+          return previous
+        }
+
         const messages = previous.dms || []
         const newMessage = subscriptionData.data.newDM
         if (messages.find((m) => m.id === newMessage.id)) {
           // the message is already here
           return previous
         }
+
         return {
           dms: [...messages, newMessage],
         }
