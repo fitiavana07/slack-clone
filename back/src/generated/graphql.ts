@@ -116,6 +116,7 @@ export type Query = {
   currentUser?: Maybe<User>
   /** Direct messages */
   dms?: Maybe<Array<Message>>
+  user?: Maybe<User>
   users?: Maybe<Array<User>>
 }
 
@@ -125,6 +126,10 @@ export type QueryChannelArgs = {
 
 export type QueryDmsArgs = {
   destID: Scalars['ID']
+}
+
+export type QueryUserArgs = {
+  id: Scalars['ID']
 }
 
 export type SendChannelMessageInput = {
@@ -480,6 +485,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     RequireFields<QueryDmsArgs, 'destID'>
+  >
+  user?: Resolver<
+    Maybe<ResolversTypes['User']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserArgs, 'id'>
   >
   users?: Resolver<
     Maybe<Array<ResolversTypes['User']>>,

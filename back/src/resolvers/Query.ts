@@ -9,6 +9,9 @@ const Query: QueryResolvers<Context> = {
   users: async (_, __, context) => {
     return await context.userService.findUsers()
   },
+  user: async (_, { id }, context) => {
+    return await context.userService.findByID(new Types.ObjectId(id))
+  },
   dms: async (_, { destID }, context) => {
     return await context.messageService.findMyDMs(
       new Types.ObjectId(destID),
