@@ -9,6 +9,7 @@ const schema = new Schema(
     name: {
       type: Schema.Types.String,
       required: true,
+      unique: true,
     },
     private: {
       type: Schema.Types.Boolean,

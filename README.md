@@ -38,6 +38,8 @@ The frontend and the backend has been written using Node v16.8.0, and has been v
 - [x] Direct Messages
 - [x] Public Channels
 - [x] Realtime messaging
+- [ ] Connection status
+- [ ] Private Channels
 
 ## Technologies used
 
